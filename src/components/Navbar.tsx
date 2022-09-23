@@ -1,4 +1,4 @@
-import { ASSOCIATED_TOKEN_PROGRAM_ID, Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { ASSOCIATED_TOKEN_PROGRAM_ID, getAssociatedTokenAddress, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ const Navbar = (props: PageProps) => {
 
     const getBalance = async () => {
         if (!wallet || !wallet.publicKey) return
-        const tokenAta = await Token.getAssociatedTokenAddress(ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, TOKEN_MINT, wallet.publicKey)
+        const tokenAta = await getAssociatedTokenAddress(TOKEN_MINT, wallet.publicKey)
         const tokenBalance = await props.connection.getTokenAccountBalance(tokenAta)
         setBalance(tokenBalance.value.uiAmount || 0)
     }

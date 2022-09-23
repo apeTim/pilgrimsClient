@@ -1,7 +1,5 @@
 import * as anchor from "@project-serum/anchor";
-import { PublicKey } from "@solana/web3.js";
 import { Awake } from "../idl";
-import axios from 'axios'
 import NftMetadata from "../interfaces/NftMetadata";
 import { api } from "../vars";
 

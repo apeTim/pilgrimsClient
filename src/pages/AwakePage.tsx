@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import NftChoser from "../components/NftChoser"
 import actions from "../actions"
 import sendAndConfirmTx from "../utils/sendAndConfirmTx"
-import { ASSOCIATED_TOKEN_PROGRAM_ID, Token, TOKEN_PROGRAM_ID } from "@solana/spl-token"
+import { ASSOCIATED_TOKEN_PROGRAM_ID, getAssociatedTokenAddress, TOKEN_PROGRAM_ID } from "@solana/spl-token"
 import { getCID } from "../utils/getMetadata"
 
 const AwakePage = (props: PageProps) => {
@@ -101,7 +101,7 @@ const AwakePage = (props: PageProps) => {
         if (!program || !wallet || !provider) return
         if (!(mints.pilgrim && mints.book && mints.scroll)) return
 
-        const tokenAta = await Token.getAssociatedTokenAddress(ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, TOKEN_MINT, wallet.publicKey)
+        const tokenAta = await getAssociatedTokenAddress(TOKEN_MINT, wallet.publicKey)
         const tokenBalance = await props.connection.getTokenAccountBalance(tokenAta)
         if ((tokenBalance.value.uiAmount || 0) < AWAKE_PRICE) return toast('You don\'t have enough $EYE tokens. 1680 $EYE needed', { type: 'error' })
         
