@@ -1,27 +1,14 @@
+import { Metadata, Nft, Sft } from "@metaplex-foundation/js"
 import { PublicKey } from "@solana/web3.js"
-import * as metaplex from '@metaplex/js'
 import NftMetadata from "../interfaces/NftMetadata"
 
-export default (nft: metaplex.programs.metadata.MetadataData, allowedSymbols: string[], allowedCreators: string[]) => {
-    if (!nft.data.creators) return false
+export default (nft: Metadata | Nft | Sft, allowedSymbols: string[], allowedCreators: string[]) => {
+    if (!nft.creators) return false
     
-    let isCreatorValid = false
-    for (let creator of nft.data.creators) {
-        if (creator.verified && allowedCreators.includes(creator.address)) {
-            isCreatorValid = true
-            break
-        }
-    }
+    let isCreatorValid = nft.creators.find(creator => creator.verified && allowedCreators.includes(creator.address.toBase58()))
     if (!isCreatorValid) return false
 
-    let isSymbolValid = false
-    for (let symbol of allowedSymbols) {
-        if (nft.data.symbol == symbol) {
-            isSymbolValid = true
-            break
-        }
-    }
-
+    let isSymbolValid = allowedSymbols.includes(nft.symbol)
     return isSymbolValid
 }
 

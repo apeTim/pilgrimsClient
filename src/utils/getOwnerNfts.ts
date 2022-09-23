@@ -1,7 +1,7 @@
 import { Connection, PublicKey } from "@solana/web3.js";
-import * as metaplex from '@metaplex/js'
-const { Metadata } = metaplex.programs.metadata
+import { Metaplex } from '@metaplex-foundation/js'
 
 export default async (connection: Connection, owner: PublicKey, isCorrect?: (nft: any) => boolean) => {
-    return await Metadata.findDataByOwner(connection, owner)
+    const metaplex = new Metaplex(connection)
+    return await metaplex.nfts().findAllByOwner({ owner }).run()
 }

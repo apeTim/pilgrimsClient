@@ -58,7 +58,7 @@ const AwakePage = (props: PageProps) => {
             if (!nftExternalMetadata) return
 
             if (checkNft(nft, PILGRIM_ALLOWED_SYMBOLS, PILGRIM_ALLOWED_CREATORS)) {
-                if (BANNED_CIDS.includes(getCID(nft.data.uri))) return
+                if (BANNED_CIDS.includes(getCID(nft.uri))) return
                 setWalletPilgrims(nfts => [...nfts, nftExternalMetadata].sort(sortNft))
             } else if (checkNft(nft, BOOK_ALLOWED_SYMBOLS, BOOK_ALLOWED_CREATORS)) {
                 setWalletBooks(nfts => [...nfts, nftExternalMetadata].sort(sortNft))
