@@ -1,0 +1,50 @@
+.App {
+}
+
+.Page {
+  padding: 0 45px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Toastify * {
+  text-transform: none !important;
+}
+
+.actionButton {
+  display: inline-block !important;
+  border: none !important;
+  color: white !important;
+  background-color: #a57f3d !important;
+  border-radius: 10px !important;
+  width: 230px !important;
+  height: 72px !important;
+  font-size: 16px !important;
+  margin: 18px;
+}
+
+.actionButton:disabled {
+  background-color: #6e5b39 !important;
+}
+
+.secondaryButton {
+  display: inline-block;
+  border: none;
+  color: white;
+  background-color: transparent;
+  border: 2px solid #a57f3d;
+  color: #a57f3d;
+  border-radius: 10px;
+  width: 100%;
+  height: 62px;
+  font-size: 16px;
+}
+
+.wallet-adapter-button-trigger {
+  background-color: #a57f3d!important;
+}
+
+.wallet-adapter-button[disabled] {
+  display: flex !important;
+  align-items: center !important;
+}
